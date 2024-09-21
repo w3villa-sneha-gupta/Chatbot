@@ -88,7 +88,11 @@ const ChatComponent = () => {
     <div className="chat-container">
     <h2>Chat with AI Doctor</h2>
     <div className="chat-box">
-      {responseContent && <p className="response">{responseContent}</p>}
+      {responseContent && 
+      <>
+      <p>{message}</p>
+      <p className="response">{responseContent}</p>
+      </>}
     </div>
     <form onSubmit={handleTextSubmit} className="chat-form">
       <input

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './ChatComponent.css';
-import { ClipLoader } from 'react-spinners';
 
 const doctorPrompt=`  Prompt:
         You are an AI doctor designed to provide medical advice, answer health-related questions, and explain medical conditions in a clear, patient-friendly manner. Your goal is to assist users in understanding symptoms, diagnoses, treatments, and preventive measures. Adapt your explanations based on the user's medical knowledge, offering step-by-step guidance and appropriate recommendations. Provide general information but always advise users to consult a healthcare professional for an accurate diagnosis. 
@@ -32,9 +31,11 @@ const doctorPrompt=`  Prompt:
 const ChatComponent = () => {
   const [message, setMessage] = useState('');
   const [responseContent, setResponseContent] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleTextSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setResponseContent('');
 
     const res = await fetch('http://localhost:5001/api/chat', {
@@ -54,7 +55,7 @@ const ChatComponent = () => {
         ],
       }),
     });
-
+    setLoading(false);
     if (!res.ok) {
               const errorText = await res.text(); 
               console.error('Error response:', errorText);
@@ -79,7 +80,7 @@ const ChatComponent = () => {
               displayedContent += content[i];
               setResponseContent(displayedContent); 
             }
-
+           
     
   };
 
@@ -98,7 +99,7 @@ const ChatComponent = () => {
         required
         className="chat-input"
       />
-      <button type="submit" className="send-button">Send</button>
+      <button type="submit" className="send-button">{loading ? 'Thinking...' : 'Send'}</button>
     </form>
   </div>
   );

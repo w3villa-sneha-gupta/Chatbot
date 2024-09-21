@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 import './ImageGeneratorComponent.css';
 
 const ImageGeneratorComponent = () => {
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
     const res = await fetch('http://localhost:5001/api/generate-image', {
       method: 'POST',
       headers: {
@@ -27,13 +30,15 @@ const ImageGeneratorComponent = () => {
     if (data && data[0]) {
       setImageUrl(data[0].image_url);
     }
+    setLoading(false);
   };
 
   return (
     <div className="image-generator-container">
     <h2> AI Image Generator</h2>
     <div className="generated-image-container">
-    {imageUrl && (
+    {loading && <ClipLoader size={50} color="#123abc" />}
+    {imageUrl&& !loading && (
       <>
         <h3>Generated Image:</h3>
         <img src={imageUrl} alt="Generated" className="generated-image" />
@@ -49,7 +54,7 @@ const ImageGeneratorComponent = () => {
         required
         className="image-input"
       />
-      <button type="submit" className="generate-button">Generate Image</button>
+      <button type="submit" className="generate-button"> {loading ? 'Generating...' : 'Generate Image'}</button>
     </form>
   </div>
   );

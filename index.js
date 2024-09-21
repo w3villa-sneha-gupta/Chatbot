@@ -1,6 +1,8 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const cors = require('cors');
+require('dotenv').config();
+
 
 
 const app = express();
@@ -23,7 +25,7 @@ app.post('/api/chat', async (req, res) => {
     headers: {
       accept: 'application/json',
       'content-type': 'application/json',
-      Authorization: 'Bearer f6f203c6-7ccd-4a3e-bbd2-a4f90f792a56', 
+      Authorization: `Bearer ${process.env.API_KEY}`, 
     },
     body: JSON.stringify(req.body),
   };
@@ -45,7 +47,7 @@ app.post('/api/generate-image', async (req, res) => {
     headers: {
       accept: 'application/json',
       'content-type': 'application/json',
-      Authorization: 'Bearer f6f203c6-7ccd-4a3e-bbd2-a4f90f792a56', 
+      Authorization: `Bearer ${process.env.API_KEY}`, 
     },
     body: JSON.stringify(req.body),
   };

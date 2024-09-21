@@ -1,5 +1,6 @@
 .image-generator-container {
     max-width: 600px;
+    min-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -42,6 +43,13 @@
   
   .generated-image-container {
     text-align: center;
+    height: 650px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #fff;
+    margin-bottom: 20px;
   }
   
   .generated-image {

@@ -7,7 +7,11 @@ import './App.css'; // Importing CSS file
 function App() {
   return (
     <Router>
-      <div className="container">
+      
+        <Routes>
+          <Route path="/chat" element={<ChatComponent />} />
+          <Route path="/generate-image" element={<ImageGeneratorComponent />} />
+          <Route path="/" element={<div className="container">
         <h1>Welcome to the AI Application</h1>
         <nav className="nav">
           <Link to="/chat">
@@ -17,12 +21,9 @@ function App() {
             <button className="nav-button">Image Generator</button>
           </Link>
         </nav>
-        <Routes>
-          <Route path="/chat" element={<ChatComponent />} />
-          <Route path="/generate-image" element={<ImageGeneratorComponent />} />
-          <Route path="/" element={<h2></h2>} />
+        </div>} />
         </Routes>
-      </div>
+     
     </Router>
   );
 }

@@ -31,13 +31,15 @@ const ImageGeneratorComponent = () => {
 
   return (
     <div className="image-generator-container">
-    <h2>Image Generator</h2>
+    <h2> AI Image Generator</h2>
+    <div className="generated-image-container">
     {imageUrl && (
-      <div className="generated-image-container">
+      <>
         <h3>Generated Image:</h3>
         <img src={imageUrl} alt="Generated" className="generated-image" />
-      </div>
+        </>
     )}
+    </div>
     <form onSubmit={handleSubmit} className="image-generator-form">
       <input
         type="text"
